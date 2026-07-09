@@ -59,7 +59,7 @@ fun BookingListScreen(
             )
             is Loadable.Empty -> BookingStateMessage(
                 title = "У вас пока нет записей",
-                description = "Выберите прогулку и оформите бронь",
+                description = "Выберите тренировку и оформите бронь",
                 buttonText = "Записаться",
                 onClick = onBookWalk,
             )
@@ -125,7 +125,7 @@ private fun BookingGroupsContent(
                             "Здесь появятся прошедшие тренировки"
                         },
                         description = if (selectedTab == BookingListTab.Upcoming) {
-                            "Можно выбрать ближайшую прогулку"
+                            "Можно выбрать ближайшую тренировку"
                         } else {
                             "Отменённые записи тоже будут здесь"
                         },
