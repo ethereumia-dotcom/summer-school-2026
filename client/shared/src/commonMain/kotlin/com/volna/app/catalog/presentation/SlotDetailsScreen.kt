@@ -50,7 +50,7 @@ fun SlotDetailsScreen(
             Loadable.Initial,
             Loadable.Loading -> {
                 BackButton(onBack)
-                ScreenTitle("Прогулка")
+                ScreenTitle("Тренировка")
                 SkeletonCard(y = VolnaTheme.tokens.sizing.listCardTopY)
                 SkeletonCard(y = VolnaTheme.tokens.sizing.listCardSecondY)
             }
@@ -61,7 +61,7 @@ fun SlotDetailsScreen(
                 onOpenMap = { onIntent(SlotDetailsIntent.OpenRouteMap) },
             )
             is Loadable.Empty -> StateMessage(
-                title = "Прогулка недоступна",
+                title = "Тренировка недоступна",
                 description = "Попробуйте выбрать другой слот",
                 buttonText = "Назад",
                 onClick = onBack,

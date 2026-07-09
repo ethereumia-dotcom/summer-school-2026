@@ -32,10 +32,10 @@ import kotlin.time.Clock
 
 data class SlotListState(
     val slots: Loadable<List<Slot>> = Loadable.Initial,
-    val filters: SlotFilters = SlotFilters(),
-    val datePreset: SlotDatePreset = SlotDatePreset.Any,
-    val draftFilters: SlotFilters = SlotFilters(),
-    val draftDatePreset: SlotDatePreset = SlotDatePreset.Any,
+    val filters: SlotFilters = defaultSevenDayFilters(),
+    val datePreset: SlotDatePreset = SlotDatePreset.NextSevenDays,
+    val draftFilters: SlotFilters = filters,
+    val draftDatePreset: SlotDatePreset = datePreset,
     val instructors: Loadable<List<Instructor>> = Loadable.Initial,
     val filtersVisible: Boolean = false,
 )
@@ -45,6 +45,15 @@ enum class SlotDatePreset {
     Today,
     NextSevenDays,
     Weekend,
+}
+private fun defaultSevenDayFilters(): SlotFilters {
+    val now = Clock.System.now()
+    val zone = TimeZone.currentSystemDefault()
+    val today = now.toLocalDateTime(zone).date
+    return SlotFilters(
+        dateFrom = today.atStartOfDayIn(zone),
+        dateTo = today.plus(DatePeriod(days = 7)).atStartOfDayIn(zone),
+    )
 }
 
 sealed interface SlotListIntent {
@@ -85,8 +94,14 @@ class SlotListStore(
             SlotListIntent.OpenFilters -> openFilters()
             SlotListIntent.CloseFilters -> mutableState.update { it.copy(filtersVisible = false) }
             SlotListIntent.ApplyFilters -> applyFilters()
-            SlotListIntent.ResetFilters -> mutableState.update {
-                it.copy(draftFilters = SlotFilters(), draftDatePreset = SlotDatePreset.Any)
+            SlotListIntent.ResetFilters -> {
+                val defaultFilters = defaultSevenDayFilters()
+                mutableState.update {
+                    it.copy(
+                        draftFilters = defaultFilters,
+                        draftDatePreset = SlotDatePreset.NextSevenDays,
+                    )
+                }
             }
             SlotListIntent.RetryInstructors -> loadInstructors(force = true)
             is SlotListIntent.SelectDatePreset -> selectDatePreset(intent.preset)
@@ -170,8 +185,10 @@ class SlotListStore(
             SlotDatePreset.Any -> SlotFilters()
             SlotDatePreset.Today -> SlotFilters(dateFrom = todayStart, dateTo = today.plus(DatePeriod(days = 1)).atStartOfDayIn(zone))
             SlotDatePreset.NextSevenDays -> {
-                val daysUntilNextWeek = 8 - today.dayOfWeek.isoDayNumber()
-                SlotFilters(dateFrom = todayStart, dateTo = today.plus(DatePeriod(days = daysUntilNextWeek)).atStartOfDayIn(zone))
+                SlotFilters(
+                    dateFrom = todayStart,
+                    dateTo = today.plus(DatePeriod(days = 7)).atStartOfDayIn(zone),
+                )
             }
             SlotDatePreset.Weekend -> {
                 val dayNumber = today.dayOfWeek.isoDayNumber()

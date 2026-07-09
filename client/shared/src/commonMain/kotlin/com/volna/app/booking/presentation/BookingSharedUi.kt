@@ -151,8 +151,8 @@ internal fun Int.pluralPlaces(): String = when {
 
 internal fun Int.pluralRentalBoards(): String = when {
     this % 10 == 1 && this % 100 != 11 -> "комплект снаряжения"
-    this % 10 in 2..4 && this % 100 !in 12..14 -> "прокатные доски"
-    else -> "прокатных досок"
+    this % 10 in 2..4 && this % 100 !in 12..14 -> "комплекта снаряжения"
+    else -> "комплектов снаряжения"
 }
 
 internal fun Instant.toUiText(): String =

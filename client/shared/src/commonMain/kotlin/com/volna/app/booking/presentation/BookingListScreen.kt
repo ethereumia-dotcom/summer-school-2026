@@ -122,7 +122,7 @@ private fun BookingGroupsContent(
                         title = if (selectedTab == BookingListTab.Upcoming) {
                             "Пока нет предстоящих записей"
                         } else {
-                            "Здесь появятся прошедшие прогулки"
+                            "Здесь появятся прошедшие тренировки"
                         },
                         description = if (selectedTab == BookingListTab.Upcoming) {
                             "Можно выбрать ближайшую прогулку"

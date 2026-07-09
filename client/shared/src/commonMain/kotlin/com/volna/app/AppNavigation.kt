@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 internal enum class MainTab(val title: String) {
-    Slots("Прогулки"),
+    Slots("Тренировки"),
     Bookings("Мои записи"),
     Profile("Профиль"),
 }

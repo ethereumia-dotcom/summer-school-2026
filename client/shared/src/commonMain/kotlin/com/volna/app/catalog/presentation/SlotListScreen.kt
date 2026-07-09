@@ -25,6 +25,7 @@ import com.volna.app.domain.model.Slot
 import com.volna.app.uikit.icons.Icons
 import com.volna.app.uikit.icons.Tune
 import com.volna.app.uikit.icons.VolnaIcon
+import com.volna.app.domain.model.SlotStatus
 
 @Composable
 fun SlotListScreen(
@@ -37,7 +38,7 @@ fun SlotListScreen(
     }
     Column(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            ScreenTitle("Прогулки")
+            ScreenTitle("Тренировки")
             VolnaIcon(
                 imageVector = Icons.Tune,
                 contentDescription = "Фильтры",
@@ -64,7 +65,7 @@ fun SlotListScreen(
                     )
                 } else {
                     StateMessage(
-                        title = "Пока нет доступных прогулок",
+                        title = "Пока нет доступных тренировок",
                         description = "Загляните позже",
                     )
                 }
@@ -161,7 +162,7 @@ private fun SlotFiltersSheet(
                         FilterChipButton("Сегодня", state.draftDatePreset == SlotDatePreset.Today) {
                             onIntent(SlotListIntent.SelectDatePreset(SlotDatePreset.Today))
                         }
-                        FilterChipButton("Эта неделя", state.draftDatePreset == SlotDatePreset.NextSevenDays) {
+                        FilterChipButton("7 дней", state.draftDatePreset == SlotDatePreset.NextSevenDays) {
                             onIntent(SlotListIntent.SelectDatePreset(SlotDatePreset.NextSevenDays))
                         }
                         FilterChipButton("Выходные", state.draftDatePreset == SlotDatePreset.Weekend) {
@@ -409,7 +410,7 @@ private fun SlotCard(
     slot: Slot,
     onSlotClick: (Slot) -> Unit,
 ) {
-    val canOpen = slot.freeSeats > 0
+    val canOpen = slot.status == SlotStatus.Scheduled && slot.freeSeats > 0
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -475,7 +476,11 @@ private fun SlotCard(
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
         ) {
             Text(
-                text = if (canOpen) "Свободно мест" else "Мест нет",
+                text = when {
+                    slot.status != SlotStatus.Scheduled -> "Отменена скалодромом"
+                    canOpen -> "Свободно мест"
+                    else -> "Мест нет"
+                },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface,
             )
