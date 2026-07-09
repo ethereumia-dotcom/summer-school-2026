@@ -252,7 +252,7 @@ private fun BookingBoardsSection(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(VolnaTheme.tokens.spacing.sm)) {
         Text(
-            text = "Доска для каждого места",
+            text = "Снаряжение для каждого места",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
@@ -509,7 +509,7 @@ private fun BookingSuccessSummaryCard(
                 verticalArrangement = Arrangement.spacedBy(VolnaTheme.tokens.spacing.sm),
             ) {
                 DetailsInfoRow("Мест", booking.seatsCount.toString())
-                DetailsInfoRow("Доска в прокат", booking.rentalCount.toString())
+                DetailsInfoRow("Снаряжение в прокат", booking.rentalCount.toString())
             }
         }
         Column(verticalArrangement = Arrangement.spacedBy(VolnaTheme.tokens.spacing.xs)) {

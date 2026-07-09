@@ -171,7 +171,7 @@ private fun SlotFiltersSheet(
                     DateRangePreviewRow(state)
                 }
 
-                FilterGroup(title = "Тип маршрута") {
+                FilterGroup(title = "Формат тренировки") {
                     FilterChipRow {
                         FilterChipButton("Новичковый", RouteType.Novice in state.draftFilters.routeTypes) {
                             onIntent(SlotListIntent.ToggleRouteType(RouteType.Novice))

@@ -226,7 +226,7 @@ private fun AuthStepLayout(
 private fun AuthLogo() {
     VolnaIcon(
         imageVector = Icons.Logo,
-        contentDescription = "Волна",
+        contentDescription = "Вертикаль",
         modifier = Modifier.fillMaxWidth(),
         tint = MaterialTheme.colorScheme.onBackground,
     )

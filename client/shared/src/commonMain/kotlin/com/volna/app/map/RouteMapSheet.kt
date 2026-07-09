@@ -72,7 +72,7 @@ fun RouteMapSheet(
                 verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Маршрут",
+                    text = "Место проведения",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
@@ -96,7 +96,7 @@ fun RouteMapSheet(
                 onOpenExternal = { mapLauncher.openExternalMap(meetingPoint) },
             )
             Text(
-                text = "Прогулка по маршруту займет ${route.durationMin} минут",
+                text = "Тренировка займет ${route.durationMin} минут",
                 modifier = Modifier.fillMaxWidth(),
                 style = MaterialTheme.typography.labelMedium,
                 color = Color(0xFF797979),

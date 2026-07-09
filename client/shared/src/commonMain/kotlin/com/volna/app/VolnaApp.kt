@@ -332,7 +332,7 @@ private fun SessionSplash() {
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "Волна",
+                text = "Вертикаль",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
             )

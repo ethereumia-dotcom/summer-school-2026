@@ -231,7 +231,7 @@ private fun SlotDetailsSheetContent(
                     color = MaterialTheme.colorScheme.onSurface,
                 )
                 Text(
-                    text = "Прогулка по маршруту «${slot.route.name}» займет ${slot.route.durationMin} минут и отлично подойдет ${slot.route.type.toDetailsAudienceText()}.",
+                    text = "Тренировка «${slot.route.name}» займет ${slot.route.durationMin} минут и отлично подойдет ${slot.route.type.toDetailsAudienceText()}.",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
@@ -258,7 +258,7 @@ private fun SlotDetailsSheetContent(
             ) {
                 DetailsInfoRow("Свободно мест", "${slot.freeSeats} из ${slot.totalSeats}")
                 DetailsInfoRow(
-                    "Прокатная доска (доступно ${availability.freeRentalBoards} шт.)",
+                    "комплект снаряжения (доступно ${availability.freeRentalBoards} шт.)",
                     "${slot.rentalPrice.value} ₽",
                     boldValue = true
                 )
