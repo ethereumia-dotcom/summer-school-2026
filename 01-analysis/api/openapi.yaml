@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  title: Climbing Client API
+  version: 1.0.0
+servers:
+  - url: https://api.vertical.example/mobile
+paths:
+  /auth/request-otp:
+    $ref: './auth/api.yaml#/paths/~1auth~1request-otp'
+  /auth/confirm-otp:
+    $ref: './auth/api.yaml#/paths/~1auth~1confirm-otp'
+  /auth/refresh:
+    $ref: './auth/api.yaml#/paths/~1auth~1refresh'
+  /slots:
+    $ref: './slots/api.yaml#/paths/~1slots'
+  /slots/{slot_id}:
+    $ref: './slots/api.yaml#/paths/~1slots~1{slot_id}'
+  /bookings:
+    $ref: './bookings/api.yaml#/paths/~1bookings'
+  /bookings/{booking_id}:
+    $ref: './bookings/api.yaml#/paths/~1bookings~1{booking_id}'
+  /bookings/{booking_id}/cancel:
+    $ref: './bookings/api.yaml#/paths/~1bookings~1{booking_id}~1cancel'
+components:
+  schemas:
+    Error:
+      $ref: './common/models.yaml#/components/schemas/Error'

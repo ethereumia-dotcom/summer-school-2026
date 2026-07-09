@@ -1,33 +1,25 @@
-# День 1 — Анализ · «Сапбординг-клуб»
+# 01-analysis — пакет артефактов по фреймворку летней школы
 
-Артефакты аналитика по сквозному проекту летней школы. Структура повторяет
-классический процесс работы аналитика: от входа заказчика до ТЗ, которое
-передаётся в **День 2** разработчику.
+Артефакты идут последовательностью «вход → уточнения → требования → дизайн → техдизайн → API → ТЗ → реализация/проверка».
 
-## Маршрут по этапам
+## Карта шагов
 
-| Этап | Папка | Что внутри |
-| :-- | :-- | :-- |
-| **Вход** | [0-customer-brief/](0-customer-brief/) | [customer-brief.md](0-customer-brief/customer-brief.md) — сырой бриф заказчика (заполнен) |
-| **1. Выявление требований** | [1-elicitation/](1-elicitation/) | [customer-questions.md](1-elicitation/customer-questions.md), [domain-description.md](1-elicitation/domain-description.md) |
-| **2. Описание требований** | [2-requirements/](2-requirements/) | [business](2-requirements/business-requirements.md) · [functional](2-requirements/functional-requirements.md) · [non-functional](2-requirements/non-functional-requirements.md) · [user-stories](2-requirements/user-stories.md) · [use-cases](2-requirements/use-cases.md) |
-| **Бриф для дизайна** | [3-design-brief/](3-design-brief/) | [design-brief.md](3-design-brief/design-brief.md) — требования для UI/UX дизайнера |
-| **3. Проектирование** | [4-design/](4-design/) | [data-model.md](4-design/data-model.md), [api-sequence.md](4-design/api-sequence.md) |
-| **4. ТЗ** | [5-mobile-app-spec/](5-mobile-app-spec/) | [README.md](5-mobile-app-spec/README.md) — шаблон продумаем совместно |
-| **API (OpenAPI)** | [api/](api/) | [redocly.yaml](api/redocly.yaml) — многофайловый OpenAPI (домены: auth, slots, bookings, profile, instructors) |
+| Шаг | Каталог | Что закрывает |
+|---|---|---|
+| 0. Вход | `0-customer-brief/` | исходный бриф и ограничения скоупа |
+| 1. Выявление | `1-elicitation/` | вопросы, ответы, доменная модель и границы |
+| 2. Требования | `2-requirements/` | BR/FR/NFR, user stories, use cases |
+| 3. Бриф для дизайна | `3-design-brief/` | foundations, экраны, состояния, bottom sheets |
+| 4. Технический дизайн | `4-design/` | модель данных и sequence-диаграммы |
+| 5. API-контракт | `api/` | OpenAPI/Redocly-структура для mobile API |
+| 6. ТЗ приложения | `5-mobile-app-spec/` | карта экранов и переиспользуемые логики |
+| 7. Реализация и проверка | `6-implementation/` | 3 feature-документа, 3 bug-документа, тест-кейсы |
 
-## Дополнительно (подготовка к лекции)
+## Гейт перед передачей в разработку
 
-- [prompts/](prompts/) — [хорошие](prompts/good-prompts.md) и [плохие](prompts/bad-prompts.md) промпты для демо.
-- [checklists/](checklists/) — [чек-лист цифровой гигиены](checklists/digital-hygiene-checklist.md) перед передачей в разработку.
-
-## Статус
-
-Бриф заказчика заполнен. Остальные файлы — **пустые шаблоны**, заполняются по ходу
-подготовки и на лекции. Шаблон ТЗ (`5-mobile-app-spec/`) ещё предстоит выстроить совместно.
-
-**API:** спецификация переведена на многофайловый формат OpenAPI (Redocly) —
-реестр доменов в [api/redocly.yaml](api/redocly.yaml); устаревший единый
-`api/openapi.yaml` больше не используется. Контракты доработаны по QA-ревью.
-
-> **Передача в День 2:** итоговые требования + модель данных + API-спецификация + ТЗ.
+- требования не выведены из «мыслей вслух» без подтверждения;
+- каждый экран привязан к FR и operationId API;
+- backend остаётся black-box источником истины;
+- клиент не создаёт слоты, форматы и инструкторов;
+- спорные идеи заказчика отнесены в Phase 2 или out of scope;
+- по каждой фиче/багу есть отдельный `.md` с целью/симптомом, требованиями, промптами, ручной проверкой и commit message.
